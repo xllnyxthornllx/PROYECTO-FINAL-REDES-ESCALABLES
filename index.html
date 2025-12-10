@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌐 CloudBridge Perú – Dashboard de Red</title>
+    <title>🌐 Proyecto Multisede Grupo 04 – Dashboard de Red</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         * {
@@ -29,13 +29,12 @@
             background: var(--dark-bg);
             color: var(--text-primary);
             overflow-x: hidden;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
         }
 
-        /* Neon Glow Animations */
         @keyframes neonGlow {
             0%, 100% {
                 box-shadow: 0 0 5px var(--cyber-blue), 0 0 10px var(--cyber-blue), 0 0 15px var(--cyber-blue);
@@ -165,7 +164,6 @@
             font-size: 1.2rem;
         }
 
-        /* Sections */
         .section {
             margin-bottom: 4rem;
             padding: 2rem;
@@ -335,7 +333,7 @@
 
         .topology-svg {
             width: 100%;
-            min-height: 600px;
+            min-height: 650px;
         }
 
         .node {
@@ -482,7 +480,6 @@
             }
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
             height: 10px;
@@ -506,7 +503,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <h1>🌐 CloudBridge</h1>
+            <h1>🌐 Proyecto G04</h1>
             <p style="color: var(--text-secondary); margin-top: 0.5rem;">Network Operations Center</p>
         </div>
         <nav>
@@ -514,8 +511,9 @@
                 <li class="nav-item"><a href="#resumen" class="nav-link">📋 Resumen del Diseño</a></li>
                 <li class="nav-item"><a href="#topologia" class="nav-link">🗺️ Topología Visual</a></li>
                 <li class="nav-item"><a href="#tecnologias" class="nav-link">⚙️ Tecnologías</a></li>
-                <li class="nav-item"><a href="#direccionamiento" class="nav-link">🔢 Direccionamiento</a></li>
+                <li class="nav-item"><a href="#direccionamiento" class="nav-link">🔢 Direccionamiento & VLANs</a></li>
                 <li class="nav-item"><a href="#enlaces" class="nav-link">🔗 Enlaces Físicos</a></li>
+                <li class="nav-item"><a href="#seguridad" class="nav-link">🛡️ NAT, HSRP y ACLs</a></li>
                 <li class="nav-item"><a href="#kpis" class="nav-link">📊 KPIs</a></li>
                 <li class="nav-item"><a href="#comandos" class="nav-link">💻 Comandos</a></li>
                 <li class="nav-item"><a href="#equipo" class="nav-link">👥 Equipo</a></li>
@@ -527,41 +525,50 @@
     <main class="main-content">
         <!-- Header -->
         <header class="header animate__animated animate__fadeInDown">
-            <h1>🌐 CloudBridge Perú</h1>
-            <p>Dashboard de Red Corporativa Multisede</p>
+            <h1>🌐 Proyecto Multisede Grupo 04</h1>
+            <p>Dashboard de la Red Corporativa Multisede</p>
         </header>
 
         <!-- Resumen del Diseño -->
         <section id="resumen" class="section animate__animated animate__fadeInLeft">
             <h2 class="section-title">📋 Resumen del Diseño</h2>
             <p style="line-height: 1.8; font-size: 1.1rem; color: var(--text-primary);">
-                La red corporativa multisede de <strong style="color: var(--cyber-blue);">CloudBridge Perú</strong> implementa un modelo <strong>Hub-and-Spoke</strong> conectando a las sedes: <strong>Lima, Arequipa, Cusco y Piura</strong>. Piura funciona como sede principal, integrando redundancia mediante <strong>HSRP, STP y EtherChannel</strong>. La asignación IP se centraliza mediante un servidor Linux en DMZ usando <strong>DHCP</strong>, con relay configurado en los MLS. El ISP realiza <strong>NAT</strong> para Internet, DMZ y HUB. Todas las sedes participan en <strong>OSPF</strong> para enrutamiento dinámico.
+                El <strong style="color: var(--cyber-blue);">Proyecto Multisede Grupo 04</strong> implementa una red corporativa con arquitectura
+                <strong>Hub-and-Spoke</strong>, donde el router <strong>HUB-CENTRAL</strong> interconecta las sedes
+                <strong>BRANCH-1, BRANCH-2, FACTORY y HQ</strong>. El tráfico hacia Internet pasa por el
+                <strong>ISP-PROVEEDOR</strong>, que también publica un <strong>servidor web Linux</strong> situado en una
+                <strong>DMZ</strong>. El enrutamiento dinámico se basa en <strong>OSPF área 0</strong>, mientras que
+                la sede HQ incorpora alta disponibilidad mediante <strong>HSRP</strong> y un núcleo conmutado
+                redundante con <strong>EtherChannel</strong> entre <strong>SW-HQ1, SW-HQ2 y SW-HQ3</strong>. La
+                segmentación se realiza con las VLAN <strong>14, 24, 34 y 44</strong>, complementadas con
+                <strong>ACLs</strong>, <strong>NAT estático y PAT</strong> y <strong>Port-Security</strong>
+                para reforzar la seguridad.
             </p>
         </section>
 
         <!-- KPIs -->
         <section id="kpis" class="section animate__animated animate__fadeInUp">
-            <h2 class="section-title">📊 Indicadores Clave de Rendimiento</h2>
+            <h2 class="section-title">📊 Indicadores Clave de la Red</h2>
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="kpi-label">Sedes Activas</div>
+                    <div class="kpi-label">Sedes de Usuario</div>
                     <div class="kpi-value" data-target="4">0</div>
-                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">🏢 Operativas</div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">🏢 BR1, BR2, FACTORY, HQ</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-label">VLANs Activas</div>
-                    <div class="kpi-value" data-target="8">0</div>
-                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">🔀 Segmentos</div>
+                    <div class="kpi-value" data-target="4">0</div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">🔀 14, 24, 34, 44</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-label">Vecinos OSPF</div>
-                    <div class="kpi-value" data-target="5">0</div>
-                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">🔄 Enrutadores</div>
+                    <div class="kpi-value" data-target="6">0</div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">🔄 ISP, HUB, BR1, BR2, FACTORY, HQ</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-label">Enlaces EtherChannel</div>
-                    <div class="kpi-value" data-target="2">0</div>
-                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">⚡ Agregados</div>
+                    <div class="kpi-value" data-target="3">0</div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">⚡ HQ Core (PCh10,20,30)</div>
                 </div>
             </div>
         </section>
@@ -570,11 +577,10 @@
         <section id="topologia" class="section animate__animated animate__fadeIn">
             <h2 class="section-title">🗺️ Topología Visual de Red</h2>
             <div class="topology-container">
-                <svg class="topology-svg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Definitions -->
+                <svg class="topology-svg" viewBox="0 0 1200 750" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                            <polygon points="0 0, 10 3, 0 6" fill="var(--cyber-blue)" />
+                            <polygon points="0 0, 10 3, 0 6" fill="#00d9ff" />
                         </marker>
                         <filter id="glow">
                             <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
@@ -585,127 +591,188 @@
                         </filter>
                     </defs>
 
-                    <!-- Links -->
-                    <line class="link" x1="600" y1="50" x2="600" y2="120" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="600" y1="180" x2="500" y2="240" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="600" y1="180" x2="600" y2="280" marker-end="url(#arrowhead)"/>
-                    
-                    <!-- HUB to MLS -->
-                    <line class="link" x1="600" y1="340" x2="200" y2="450" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="600" y1="340" x2="450" y2="450" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="600" y1="340" x2="750" y2="450" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="600" y1="340" x2="1000" y2="450" marker-end="url(#arrowhead)"/>
+                    <!-- Cloud to ISP -->
+                    <line class="link" x1="600" y1="60" x2="600" y2="130" marker-end="url(#arrowhead)"/>
+                    <!-- ISP to Linux -->
+                    <line class="link" x1="560" y1="190" x2="420" y2="260" marker-end="url(#arrowhead)"/>
+                    <!-- ISP to HUB -->
+                    <line class="link" x1="640" y1="190" x2="600" y2="280" marker-end="url(#arrowhead)"/>
 
-                    <!-- MLS to SW -->
-                    <line class="link" x1="200" y1="510" x2="200" y2="600" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="450" y1="510" x2="450" y2="600" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="750" y1="510" x2="700" y2="600" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="750" y1="510" x2="800" y2="600" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="1000" y1="510" x2="1000" y2="600" marker-end="url(#arrowhead)"/>
+                    <!-- HUB to Branch-1/2/Factory/HQ -->
+                    <line class="link" x1="600" y1="340" x2="250" y2="420" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="600" y1="340" x2="450" y2="420" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="600" y1="340" x2="750" y2="420" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="600" y1="340" x2="950" y2="420" marker-end="url(#arrowhead)"/>
 
-                    <!-- Piura EtherChannel -->
-                    <line class="link" x1="1000" y1="660" x2="900" y2="720" stroke-width="4" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="1000" y1="660" x2="1100" y2="720" stroke-width="4" marker-end="url(#arrowhead)"/>
-                    <line class="link" x1="900" y1="720" x2="1100" y2="720" stroke-width="3"/>
+                    <!-- Branch-1 to SW-B1 and PC1 -->
+                    <line class="link" x1="250" y1="480" x2="150" y2="560" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="150" y1="620" x2="80" y2="690" marker-end="url(#arrowhead)"/>
 
-                    <!-- NET Node -->
+                    <!-- Branch-2 to SW-B2 and PCs -->
+                    <line class="link" x1="450" y1="480" x2="380" y2="560" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="380" y1="620" x2="310" y2="690" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="380" y1="620" x2="450" y2="690" marker-end="url(#arrowhead)"/>
+
+                    <!-- Factory to SW-F1/F2 and PCs -->
+                    <line class="link" x1="750" y1="480" x2="700" y2="560" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="750" y1="480" x2="800" y2="560" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="700" y1="620" x2="650" y2="690" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="800" y1="620" x2="850" y2="690" marker-end="url(#arrowhead)"/>
+
+                    <!-- HQ router to HQ core switch -->
+                    <line class="link" x1="950" y1="480" x2="950" y2="560" marker-end="url(#arrowhead)"/>
+
+                    <!-- HQ core triangle EtherChannel -->
+                    <line class="link" x1="950" y1="620" x2="880" y2="660" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="950" y1="620" x2="1020" y2="660" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="880" y1="660" x2="1020" y2="660" stroke-width="3"/>
+
+                    <!-- PCs HQ -->
+                    <line class="link" x1="880" y1="680" x2="830" y2="730" marker-end="url(#arrowhead)"/>
+                    <line class="link" x1="1020" y1="680" x2="1070" y2="730" marker-end="url(#arrowhead)"/>
+
+                    <!-- ==== NODES ==== -->
+
+                    <!-- Cloud -->
                     <g class="node" transform="translate(600, 50)">
                         <circle class="node-circle" r="30" filter="url(#glow)"/>
-                        <text class="node-text" y="5">☁️ NET</text>
+                        <text class="node-text" y="5">☁️ NUBE</text>
                     </g>
 
-                    <!-- ISP Router -->
-                    <g class="node" transform="translate(600, 150)">
-                        <rect class="node-circle" x="-35" y="-25" width="70" height="50" rx="5" filter="url(#glow)"/>
-                        <text class="node-text" y="5">🔀 ISP</text>
+                    <!-- ISP -->
+                    <g class="node" transform="translate(600, 170)">
+                        <rect class="node-circle" x="-45" y="-25" width="90" height="50" rx="6" filter="url(#glow)"/>
+                        <text class="node-text" y="5">🚦 ISP-PROVEEDOR</text>
                     </g>
 
-                    <!-- Linux Server -->
-                    <g class="node" transform="translate(500, 270)">
-                        <rect class="node-circle" x="-40" y="-25" width="80" height="50" rx="5" filter="url(#glow)"/>
-                        <text class="node-text" y="5">🐧 Linux</text>
+                    <!-- Linux Web Server -->
+                    <g class="node" transform="translate(420, 270)">
+                        <rect class="node-circle" x="-50" y="-25" width="100" height="50" rx="6" filter="url(#glow)"/>
+                        <text class="node-text" y="-2">🐧 WebServer</text>
+                        <text class="node-text" y="12">DMZ 172.25.24.10</text>
                     </g>
 
-                    <!-- HUB Router -->
+                    <!-- HUB-CENTRAL -->
                     <g class="node" transform="translate(600, 310)">
-                        <rect class="node-circle" x="-35" y="-25" width="70" height="50" rx="5" filter="url(#glow)"/>
-                        <text class="node-text" y="5">🔀 HUB</text>
+                        <rect class="node-circle" x="-55" y="-25" width="110" height="50" rx="6" filter="url(#glow)"/>
+                        <text class="node-text" y="5">🔀 HUB-CENTRAL</text>
                     </g>
 
-                    <!-- MLS Lima -->
-                    <g class="node" transform="translate(200, 480)">
-                        <rect class="node-circle" x="-45" y="-25" width="90" height="50" rx="5" filter="url(#glow)"/>
-                        <text class="node-text" y="5">🔷 MLS-Lima</text>
+                    <!-- Branch-1 Router -->
+                    <g class="node" transform="translate(250, 450)">
+                        <rect class="node-circle" x="-55" y="-25" width="110" height="50" rx="6" filter="url(#glow)"/>
+                        <text class="node-text" y="-2">📡 BRANCH-1</text>
+                        <text class="node-text" y="12">VLAN 14</text>
                     </g>
 
-                    <!-- MLS Arequipa -->
-                    <g class="node" transform="translate(450, 480)">
-                        <rect class="node-circle" x="-55" y="-25" width="110" height="50" rx="5" filter="url(#glow)"/>
-                        <text class="node-text" y="5">🔷 MLS-Arequipa</text>
+                    <!-- Branch-2 Router -->
+                    <g class="node" transform="translate(450, 450)">
+                        <rect class="node-circle" x="-55" y="-25" width="110" height="50" rx="6" filter="url(#glow)"/>
+                        <text class="node-text" y="-2">📡 BRANCH-2</text>
+                        <text class="node-text" y="12">VLAN 24</text>
                     </g>
 
-                    <!-- MLS Cusco -->
-                    <g class="node" transform="translate(750, 480)">
-                        <rect class="node-circle" x="-50" y="-25" width="100" height="50" rx="5" filter="url(#glow)"/>
-                        <text class="node-text" y="5">🔷 MLS-Cusco</text>
+                    <!-- Factory Router -->
+                    <g class="node" transform="translate(750, 450)">
+                        <rect class="node-circle" x="-55" y="-25" width="110" height="50" rx="6" filter="url(#glow)"/>
+                        <text class="node-text" y="-2">🏭 FACTORY</text>
+                        <text class="node-text" y="12">VLAN 34</text>
                     </g>
 
-                    <!-- MLS Piura -->
-                    <g class="node" transform="translate(1000, 480)">
-                        <rect class="node-circle" x="-50" y="-25" width="100" height="50" rx="5" filter="url(#glow)"/>
-                        <text class="node-text" y="5">🔷 MLS-Piura</text>
+                    <!-- HQ Router -->
+                    <g class="node" transform="translate(950, 450)">
+                        <rect class="node-circle" x="-65" y="-25" width="130" height="50" rx="6" filter="url(#glow)"/>
+                        <text class="node-text" y="-2">🏛️ HQ-PRINCIPAL</text>
+                        <text class="node-text" y="12">HSRP VLAN 44</text>
                     </g>
 
-                    <!-- SW Lima -->
-                    <g class="node" transform="translate(200, 630)">
-                        <rect class="node-circle" x="-40" y="-20" width="80" height="40" rx="5" fill="#8b0000" stroke="#ff4444"/>
-                        <text class="node-text" y="5">SW-Lima</text>
-                    </g>
-
-                    <!-- SW Arequipa -->
-                    <g class="node" transform="translate(450, 630)">
-                        <rect class="node-circle" x="-50" y="-20" width="100" height="40" rx="5" fill="#8b0000" stroke="#ff4444"/>
-                        <text class="node-text" y="5">SW-Arequipa</text>
-                    </g>
-
-                    <!-- SW Cusco1 -->
-                    <g class="node" transform="translate(700, 630)">
+                    <!-- SW-B1 -->
+                    <g class="node" transform="translate(150, 590)">
                         <rect class="node-circle" x="-45" y="-20" width="90" height="40" rx="5" fill="#8b0000" stroke="#ff4444"/>
-                        <text class="node-text" y="5">SW-Cusco1</text>
+                        <text class="node-text" y="5">SW-B1</text>
                     </g>
 
-                    <!-- SW Cusco2 -->
-                    <g class="node" transform="translate(800, 630)">
+                    <!-- PC1 -->
+                    <g class="node" transform="translate(80, 710)">
+                        <rect class="node-circle" x="-35" y="-18" width="70" height="36" rx="5" fill="#123" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">🖥️ PC1</text>
+                    </g>
+
+                    <!-- SW-B2 -->
+                    <g class="node" transform="translate(380, 590)">
                         <rect class="node-circle" x="-45" y="-20" width="90" height="40" rx="5" fill="#8b0000" stroke="#ff4444"/>
-                        <text class="node-text" y="5">SW-Cusco2</text>
+                        <text class="node-text" y="5">SW-B2</text>
                     </g>
 
-                    <!-- SW Piura1 -->
-                    <g class="node" transform="translate(1000, 630)">
+                    <!-- PC6 -->
+                    <g class="node" transform="translate(310, 710)">
+                        <rect class="node-circle" x="-35" y="-18" width="70" height="36" rx="5" fill="#123" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">🖥️ PC6</text>
+                    </g>
+
+                    <!-- PC7 -->
+                    <g class="node" transform="translate(450, 710)">
+                        <rect class="node-circle" x="-35" y="-18" width="70" height="36" rx="5" fill="#123" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">🖥️ PC7</text>
+                    </g>
+
+                    <!-- SW-F1 -->
+                    <g class="node" transform="translate(700, 590)">
                         <rect class="node-circle" x="-45" y="-20" width="90" height="40" rx="5" fill="#8b0000" stroke="#ff4444"/>
-                        <text class="node-text" y="5">SW-Piura1</text>
+                        <text class="node-text" y="5">SW-F1</text>
                     </g>
 
-                    <!-- SW Piura2 -->
-                    <g class="node" transform="translate(900, 750)">
+                    <!-- SW-F2 -->
+                    <g class="node" transform="translate(800, 590)">
                         <rect class="node-circle" x="-45" y="-20" width="90" height="40" rx="5" fill="#8b0000" stroke="#ff4444"/>
-                        <text class="node-text" y="5">SW-Piura2</text>
+                        <text class="node-text" y="5">SW-F2</text>
                     </g>
 
-                    <!-- SW Piura3 -->
-                    <g class="node" transform="translate(1100, 750)">
-                        <rect class="node-circle" x="-45" y="-20" width="90" height="40" rx="5" fill="#8b0000" stroke="#ff4444"/>
-                        <text class="node-text" y="5">SW-Piura3</text>
+                    <!-- PC2 -->
+                    <g class="node" transform="translate(650, 710)">
+                        <rect class="node-circle" x="-35" y="-18" width="70" height="36" rx="5" fill="#123" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">🖥️ PC2</text>
                     </g>
 
-                    <!-- Labels -->
-                    <text class="link-label" x="550" y="100">G3</text>
-                    <text class="link-label" x="520" y="220">Gi1</text>
-                    <text class="link-label" x="620" y="230">Gi2</text>
-                    <text class="link-label" x="400" y="400">Gi2</text>
-                    <text class="link-label" x="520" y="400">Gi5</text>
-                    <text class="link-label" x="670" y="400">Gi3</text>
-                    <text class="link-label" x="800" y="400">Gi4</text>
+                    <!-- PC3 -->
+                    <g class="node" transform="translate(850, 710)">
+                        <rect class="node-circle" x="-35" y="-18" width="70" height="36" rx="5" fill="#123" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">🖥️ PC3</text>
+                    </g>
+
+                    <!-- HQ Core Switches -->
+                    <g class="node" transform="translate(950, 590)">
+                        <rect class="node-circle" x="-50" y="-20" width="100" height="40" rx="5" fill="#004080" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">SW-HQ1</text>
+                    </g>
+
+                    <g class="node" transform="translate(880, 660)">
+                        <rect class="node-circle" x="-50" y="-20" width="100" height="40" rx="5" fill="#004080" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">SW-HQ2</text>
+                    </g>
+
+                    <g class="node" transform="translate(1020, 660)">
+                        <rect class="node-circle" x="-50" y="-20" width="100" height="40" rx="5" fill="#004080" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">SW-HQ3</text>
+                    </g>
+
+                    <!-- HQ PCs -->
+                    <g class="node" transform="translate(830, 730)">
+                        <rect class="node-circle" x="-35" y="-18" width="70" height="36" rx="5" fill="#123" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">🖥️ PC4</text>
+                    </g>
+
+                    <g class="node" transform="translate(1070, 730)">
+                        <rect class="node-circle" x="-35" y="-18" width="70" height="36" rx="5" fill="#123" stroke="#00d9ff"/>
+                        <text class="node-text" y="5">🖥️ PC5</text>
+                    </g>
+
+                    <!-- Link labels -->
+                    <text class="link-label" x="585" y="95">e0/0</text>
+                    <text class="link-label" x="510" y="225">e0/1</text>
+                    <text class="link-label" x="635" y="235">e0/2</text>
+                    <text class="link-label" x="430" y="380">10.10.4.x</text>
+                    <text class="link-label" x="770" y="380">10.10.4.x</text>
                 </svg>
             </div>
         </section>
@@ -729,87 +796,73 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>OSPF</strong></td>
+                            <td><strong>OSPF área 0</strong></td>
                             <td>L3</td>
-                            <td>ISP, HUB, MLS x4</td>
-                            <td>Enrutamiento dinámico</td>
+                            <td>ISP, HUB, BR1, BR2, FACTORY, HQ</td>
+                            <td>Enrutamiento dinámico multisede</td>
                             <td><span class="status-badge">Activo</span></td>
                         </tr>
                         <tr>
                             <td><strong>VLSM</strong></td>
                             <td>L3</td>
-                            <td>Todas las sedes</td>
-                            <td>Optimización IP</td>
+                            <td>WAN 10.10.4.0/30 y 200.100.101.0/30</td>
+                            <td>Optimización del espacio IP</td>
                             <td><span class="status-badge">Activo</span></td>
                         </tr>
                         <tr>
-                            <td><strong>VLANs</strong></td>
+                            <td><strong>VLANs (14, 24, 34, 44)</strong></td>
                             <td>L2</td>
-                            <td>Switches</td>
-                            <td>Segmentación</td>
+                            <td>SW-B1, SW-B2, SW-F1/F2, SW-HQ1/2/3</td>
+                            <td>Segmentación por sede/departamento</td>
                             <td><span class="status-badge">Activo</span></td>
                         </tr>
                         <tr>
-                            <td><strong>Inter-VLAN</strong></td>
+                            <td><strong>Inter-VLAN Routing</strong></td>
                             <td>L3</td>
-                            <td>Cusco, Piura</td>
-                            <td>Comunicación entre VLAN</td>
-                            <td><span class="status-badge">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>STP</strong></td>
-                            <td>L2</td>
-                            <td>Piura</td>
-                            <td>Prevención de loops</td>
-                            <td><span class="status-badge">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>EtherChannel</strong></td>
-                            <td>L2</td>
-                            <td>Piura</td>
-                            <td>Agregación</td>
+                            <td>BR1, BR2, FACTORY, HQ</td>
+                            <td>Puerta de enlace de cada VLAN</td>
                             <td><span class="status-badge">Activo</span></td>
                         </tr>
                         <tr>
                             <td><strong>HSRP</strong></td>
                             <td>L3</td>
-                            <td>Piura</td>
-                            <td>Redundancia gateway</td>
+                            <td>HQ-PRINCIPAL, HQ-SECUNDARIO</td>
+                            <td>Gateway virtual 192.168.44.1</td>
                             <td><span class="status-badge">Activo</span></td>
                         </tr>
                         <tr>
-                            <td><strong>DHCP Server</strong></td>
-                            <td>L7</td>
-                            <td>Linux</td>
-                            <td>Asignación IP</td>
-                            <td><span class="status-badge">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>DHCP Relay</strong></td>
-                            <td>L3</td>
-                            <td>MLS (4)</td>
-                            <td>Forward DHCP</td>
-                            <td><span class="status-badge">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>NAT Overload</strong></td>
-                            <td>L3</td>
-                            <td>ISP</td>
-                            <td>Salida Internet</td>
-                            <td><span class="status-badge">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>ACLs</strong></td>
-                            <td>L3</td>
-                            <td>ISP, Piura</td>
-                            <td>Seguridad</td>
-                            <td><span class="status-badge">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Port Security</strong></td>
+                            <td><strong>EtherChannel (LACP)</strong></td>
                             <td>L2</td>
-                            <td>Switches acceso</td>
-                            <td>Control dispositivos</td>
+                            <td>SW-HQ1, SW-HQ2, SW-HQ3</td>
+                            <td>Núcleo redundante en HQ</td>
+                            <td><span class="status-badge">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>NAT estático</strong></td>
+                            <td>L3</td>
+                            <td>ISP-PROVEEDOR</td>
+                            <td>Publicar WebServer 200.100.100.10</td>
+                            <td><span class="status-badge">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>NAT Overload (PAT)</strong></td>
+                            <td>L3</td>
+                            <td>HUB-CENTRAL</td>
+                            <td>Salida a Internet de todas las LAN</td>
+                            <td><span class="status-badge">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ACLs extendidas</strong></td>
+                            <td>L3</td>
+                            <td>ISP, HQ</td>
+                            <td>Filtrar tráfico hacia DMZ y HQ</td>
+                            <td><span class="status-badge">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Port-Security</strong></td>
+                            <td>L2</td>
+                            <td>SW-B1, SW-B2, SW-HQx</td>
+                            <td>Limitar hosts por puerto</td>
                             <td><span class="status-badge">Activo</span></td>
                         </tr>
                     </tbody>
@@ -817,90 +870,146 @@
             </div>
         </section>
 
-        <!-- Tabla de Direccionamiento -->
+        <!-- Direccionamiento + VLANs -->
         <section id="direccionamiento" class="section animate__animated animate__fadeIn">
-            <h2 class="section-title">🔢 Tabla de Direccionamiento IP</h2>
+            <h2 class="section-title">🔢 Tabla de Direccionamiento IP y VLANs</h2>
+
+            <!-- Redes principales -->
+            <h3 style="margin-top: 1rem;">Redes Lógicas</h3>
             <div class="table-container">
                 <table>
                     <thead>
                         <tr>
-                            <th>Red</th>
+                            <th>Nombre de Red</th>
                             <th>Dirección</th>
                             <th>Máscara</th>
                             <th>Tipo</th>
-                            <th>Sede</th>
+                            <th>Ubicación</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Lima LAN</strong></td>
+                            <td><strong>BRANCH-1 LAN</strong></td>
                             <td>192.168.14.0</td>
                             <td>/24</td>
-                            <td>LAN</td>
-                            <td>Lima</td>
+                            <td>LAN (VLAN 14)</td>
+                            <td>BRANCH-1</td>
                         </tr>
                         <tr>
-                            <td><strong>Arequipa LAN</strong></td>
+                            <td><strong>BRANCH-2 LAN</strong></td>
                             <td>192.168.24.0</td>
-                            <td>/27</td>
-                            <td>LAN</td>
-                            <td>Arequipa</td>
+                            <td>/24</td>
+                            <td>LAN (VLAN 24)</td>
+                            <td>BRANCH-2</td>
                         </tr>
                         <tr>
-                            <td><strong>Cusco LAN</strong></td>
+                            <td><strong>FACTORY LAN</strong></td>
                             <td>192.168.34.0</td>
                             <td>/24</td>
-                            <td>LAN</td>
-                            <td>Cusco</td>
+                            <td>LAN (VLAN 34)</td>
+                            <td>FACTORY</td>
                         </tr>
                         <tr>
-                            <td><strong>Piura VLAN 54</strong></td>
-                            <td>192.168.54.0</td>
-                            <td>/25</td>
-                            <td>VLAN</td>
-                            <td>Piura</td>
+                            <td><strong>HQ LAN</strong></td>
+                            <td>192.168.44.0</td>
+                            <td>/24</td>
+                            <td>LAN (VLAN 44)</td>
+                            <td>HQ</td>
                         </tr>
                         <tr>
-                            <td><strong>Piura VLAN 55</strong></td>
-                            <td>192.168.54.128</td>
-                            <td>/25</td>
-                            <td>VLAN</td>
-                            <td>Piura</td>
-                        </tr>
-                        <tr>
-                            <td><strong>WAN Lima</strong></td>
-                            <td>10.0.14.0</td>
+                            <td><strong>WAN BR1</strong></td>
+                            <td>10.10.4.0</td>
                             <td>/30</td>
-                            <td>WAN</td>
-                            <td>Lima</td>
+                            <td>WAN HUB ↔ BRANCH-1</td>
+                            <td>Backbone</td>
                         </tr>
                         <tr>
-                            <td><strong>WAN Arequipa</strong></td>
-                            <td>10.0.14.4</td>
+                            <td><strong>WAN BR2</strong></td>
+                            <td>10.10.4.4</td>
                             <td>/30</td>
-                            <td>WAN</td>
-                            <td>Arequipa</td>
+                            <td>WAN HUB ↔ BRANCH-2</td>
+                            <td>Backbone</td>
                         </tr>
                         <tr>
-                            <td><strong>WAN Cusco</strong></td>
-                            <td>10.0.14.8</td>
+                            <td><strong>WAN FACTORY</strong></td>
+                            <td>10.10.4.8</td>
                             <td>/30</td>
-                            <td>WAN</td>
-                            <td>Cusco</td>
+                            <td>WAN HUB ↔ FACTORY</td>
+                            <td>Backbone</td>
                         </tr>
                         <tr>
-                            <td><strong>WAN Piura</strong></td>
-                            <td>10.0.14.12</td>
+                            <td><strong>WAN HQ</strong></td>
+                            <td>10.10.4.12</td>
                             <td>/30</td>
-                            <td>WAN</td>
-                            <td>Piura</td>
+                            <td>WAN HUB ↔ HQ</td>
+                            <td>Backbone</td>
                         </tr>
                         <tr>
-                            <td><strong>DMZ Linux</strong></td>
+                            <td><strong>DMZ WebServer</strong></td>
                             <td>172.25.24.0</td>
                             <td>/24</td>
                             <td>DMZ</td>
-                            <td>Central</td>
+                            <td>ISP ↔ Linux</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ISP–HUB</strong></td>
+                            <td>200.100.101.0</td>
+                            <td>/30</td>
+                            <td>WAN ISP ↔ HUB</td>
+                            <td>Backbone</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Red pública Web</strong></td>
+                            <td>200.100.100.0</td>
+                            <td>/24</td>
+                            <td>Internet (NAT)</td>
+                            <td>NUBE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- VLANs -->
+            <h3>VLANs y Gateways</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VLAN</th>
+                            <th>Nombre</th>
+                            <th>Sede</th>
+                            <th>Gateway</th>
+                            <th>Rango de Hosts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>14</td>
+                            <td>COMERCIAL</td>
+                            <td>BRANCH-1</td>
+                            <td>192.168.14.1</td>
+                            <td>192.168.14.2 – 192.168.14.254</td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>SOPORTE</td>
+                            <td>BRANCH-2</td>
+                            <td>192.168.24.1</td>
+                            <td>192.168.24.2 – 192.168.24.254</td>
+                        </tr>
+                        <tr>
+                            <td>34</td>
+                            <td>PRODUCCION</td>
+                            <td>FACTORY</td>
+                            <td>192.168.34.1</td>
+                            <td>192.168.34.2 – 192.168.34.254</td>
+                        </tr>
+                        <tr>
+                            <td>44</td>
+                            <td>ADMIN</td>
+                            <td>HQ</td>
+                            <td>192.168.44.1 (HSRP)</td>
+                            <td>192.168.44.2 – 192.168.44.254</td>
                         </tr>
                     </tbody>
                 </table>
@@ -925,31 +1034,187 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>NET</td><td>e0</td><td>ISP</td><td>G3</td></tr>
-                        <tr><td>2</td><td>Linux (DMZ)</td><td>e1</td><td>ISP</td><td>Gi1</td></tr>
-                        <tr><td>3</td><td>ISP</td><td>Gi2</td><td>HUB</td><td>Gi1</td></tr>
-                        <tr><td>4</td><td>HUB</td><td>Gi2</td><td>MLS-Lima</td><td>e0/0</td></tr>
-                        <tr><td>5</td><td>HUB</td><td>Gi5</td><td>MLS-Arequipa</td><td>e0/0</td></tr>
-                        <tr><td>6</td><td>HUB</td><td>Gi3</td><td>MLS-Cusco</td><td>e0/0</td></tr>
-                        <tr><td>7</td><td>HUB</td><td>Gi4</td><td>MLS-Piura</td><td>e0/0</td></tr>
-                        <tr><td>8</td><td>MLS-Lima</td><td>e0/1</td><td>SW-Lima</td><td>e0/0</td></tr>
-                        <tr><td>9</td><td>SW-Lima</td><td>e0/1</td><td>PC1</td><td>eth0</td></tr>
-                        <tr><td>10</td><td>MLS-Arequipa</td><td>e0/1</td><td>SW-Arequipa</td><td>e0/0</td></tr>
-                        <tr><td>11</td><td>SW-Arequipa</td><td>e0/1</td><td>PC7</td><td>eth0</td></tr>
-                        <tr><td>12</td><td>SW-Arequipa</td><td>e0/2</td><td>PC6</td><td>eth0</td></tr>
-                        <tr><td>13</td><td>MLS-Cusco</td><td>e0/1</td><td>SW-Cusco1</td><td>e0/0</td></tr>
-                        <tr><td>14</td><td>MLS-Cusco</td><td>e0/2</td><td>SW-Cusco2</td><td>e0/0</td></tr>
-                        <tr><td>15</td><td>SW-Cusco1</td><td>e0/1</td><td>PC2</td><td>eth0</td></tr>
-                        <tr><td>16</td><td>SW-Cusco2</td><td>e0/1</td><td>PC3</td><td>eth0</td></tr>
-                        <tr><td>17</td><td>MLS-Piura</td><td>e0/1</td><td>SW-Piura1</td><td>e0/0</td></tr>
-                        <tr><td>18</td><td>SW-Piura1</td><td>e1/0</td><td>SW-Piura2</td><td>e1/0</td></tr>
-                        <tr><td>19</td><td>SW-Piura1</td><td>e1/1</td><td>SW-Piura2</td><td>e1/1</td></tr>
-                        <tr><td>20</td><td>SW-Piura1</td><td>e2/0</td><td>SW-Piura3</td><td>e2/0</td></tr>
-                        <tr><td>21</td><td>SW-Piura1</td><td>e2/1</td><td>SW-Piura3</td><td>e2/1</td></tr>
-                        <tr><td>22</td><td>SW-Piura2</td><td>e0/0</td><td>SW-Piura3</td><td>e0/0</td></tr>
-                        <tr><td>23</td><td>SW-Piura2</td><td>e0/1</td><td>SW-Piura3</td><td>e0/1</td></tr>
-                        <tr><td>24</td><td>SW-Piura2</td><td>e2/0</td><td>PC4</td><td>eth0</td></tr>
-                        <tr><td>25</td><td>SW-Piura3</td><td>e1/0</td><td>PC5</td><td>eth0</td></tr>
+                        <tr><td>1</td><td>NUBE</td><td>—</td><td>ISP-PROVEEDOR</td><td>e0/0</td></tr>
+                        <tr><td>2</td><td>ISP-PROVEEDOR</td><td>e0/1</td><td>WebServer (Linux)</td><td>eth0</td></tr>
+                        <tr><td>3</td><td>ISP-PROVEEDOR</td><td>e0/2</td><td>HUB-CENTRAL</td><td>e0/0</td></tr>
+
+                        <tr><td>4</td><td>HUB-CENTRAL</td><td>e0/2</td><td>BRANCH-1</td><td>e0/1</td></tr>
+                        <tr><td>5</td><td>BRANCH-1</td><td>e0/3</td><td>SW-B1</td><td>e0/2</td></tr>
+                        <tr><td>6</td><td>SW-B1</td><td>e0/0</td><td>PC1</td><td>eth0</td></tr>
+
+                        <tr><td>7</td><td>HUB-CENTRAL</td><td>e1/0</td><td>BRANCH-2</td><td>e0/0</td></tr>
+                        <tr><td>8</td><td>BRANCH-2</td><td>e0/1</td><td>SW-B2</td><td>e0/0</td></tr>
+                        <tr><td>9</td><td>SW-B2</td><td>e0/2</td><td>PC6</td><td>eth0</td></tr>
+                        <tr><td>10</td><td>SW-B2</td><td>e0/1</td><td>PC7</td><td>eth0</td></tr>
+
+                        <tr><td>11</td><td>HUB-CENTRAL</td><td>e0/3</td><td>FACTORY</td><td>e0/0</td></tr>
+                        <tr><td>12</td><td>FACTORY</td><td>e0/1</td><td>SW-F1</td><td>e0/1</td></tr>
+                        <tr><td>13</td><td>SW-F1</td><td>e0/0</td><td>PC2</td><td>eth0</td></tr>
+                        <tr><td>14</td><td>FACTORY</td><td>e0/2</td><td>SW-F2</td><td>e0/1</td></tr>
+                        <tr><td>15</td><td>SW-F2</td><td>e0/0</td><td>PC3</td><td>eth0</td></tr>
+
+                        <tr><td>16</td><td>HUB-CENTRAL</td><td>e1/1</td><td>HQ-PRINCIPAL</td><td>e0/0</td></tr>
+                        <tr><td>17</td><td>HQ-PRINCIPAL</td><td>e0/1</td><td>SW-HQ1</td><td>e0/0</td></tr>
+                        <tr><td>18</td><td>HQ-SECUNDARIO</td><td>Gi0/1</td><td>SW-HQ1</td><td>e1/0</td></tr>
+
+                        <!-- EtherChannel HQ: SW-HQ1 <-> SW-HQ2 -->
+                        <tr><td>19</td><td>SW-HQ1</td><td>e0/1</td><td>SW-HQ2</td><td>e0/0</td></tr>
+                        <tr><td>20</td><td>SW-HQ1</td><td>e0/2</td><td>SW-HQ2</td><td>e0/1</td></tr>
+
+                        <!-- EtherChannel HQ: SW-HQ1 <-> SW-HQ3 -->
+                        <tr><td>21</td><td>SW-HQ1</td><td>e0/3</td><td>SW-HQ3</td><td>e0/0</td></tr>
+                        <tr><td>22</td><td>SW-HQ1</td><td>e1/0</td><td>SW-HQ3</td><td>e0/1</td></tr>
+
+                        <!-- EtherChannel HQ: SW-HQ2 <-> SW-HQ3 -->
+                        <tr><td>23</td><td>SW-HQ2</td><td>e0/2</td><td>SW-HQ3</td><td>e0/2</td></tr>
+                        <tr><td>24</td><td>SW-HQ2</td><td>e0/3</td><td>SW-HQ3</td><td>e0/3</td></tr>
+
+                        <!-- PCs HQ -->
+                        <tr><td>25</td><td>SW-HQ2</td><td>e1/0</td><td>PC4</td><td>eth0</td></tr>
+                        <tr><td>26</td><td>SW-HQ3</td><td>e1/0</td><td>PC5</td><td>eth0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- NAT, HSRP y ACLs -->
+        <section id="seguridad" class="section animate__animated animate__fadeInUp">
+            <h2 class="section-title">🛡️ NAT, HSRP, EtherChannel y ACLs</h2>
+
+            <h3>NAT y Publicación de Servicios</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dispositivo</th>
+                            <th>Tipo</th>
+                            <th>Interfaces</th>
+                            <th>Detalle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ISP-PROVEEDOR</td>
+                            <td>NAT estático</td>
+                            <td>inside: e0/1 (DMZ) / outside: e0/0 (Internet)</td>
+                            <td>Publica 172.25.24.10 como 200.100.100.10 (HTTP/HTTPS)</td>
+                        </tr>
+                        <tr>
+                            <td>HUB-CENTRAL</td>
+                            <td>NAT Overload (PAT)</td>
+                            <td>inside: e0/2, e1/0, e0/3, e1/1 / outside: e0/0</td>
+                            <td>Traduce las LAN 192.168.14.0/24, 24.0/24, 34.0/24, 44.0/24 hacia Internet</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>HSRP – Sede HQ</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Grupo</th>
+                            <th>Dispositivo</th>
+                            <th>Interfaz</th>
+                            <th>IP real</th>
+                            <th>IP virtual</th>
+                            <th>Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>44</td>
+                            <td>HQ-PRINCIPAL</td>
+                            <td>Vlan44</td>
+                            <td>192.168.44.2</td>
+                            <td>192.168.44.1</td>
+                            <td>Active</td>
+                        </tr>
+                        <tr>
+                            <td>44</td>
+                            <td>HQ-SECUNDARIO</td>
+                            <td>Vlan44</td>
+                            <td>192.168.44.3</td>
+                            <td>192.168.44.1</td>
+                            <td>Standby</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>EtherChannel – Núcleo HQ</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Port-Channel</th>
+                            <th>Switch A</th>
+                            <th>Puertos A</th>
+                            <th>Switch B</th>
+                            <th>Puertos B</th>
+                            <th>Modo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Po10</td>
+                            <td>SW-HQ1</td>
+                            <td>e0/1, e0/2</td>
+                            <td>SW-HQ2</td>
+                            <td>e0/0, e0/1</td>
+                            <td>LACP activo</td>
+                        </tr>
+                        <tr>
+                            <td>Po20</td>
+                            <td>SW-HQ1</td>
+                            <td>e0/3, e1/0</td>
+                            <td>SW-HQ3</td>
+                            <td>e0/0, e0/1</td>
+                            <td>LACP activo</td>
+                        </tr>
+                        <tr>
+                            <td>Po30</td>
+                            <td>SW-HQ2</td>
+                            <td>e0/2, e0/3</td>
+                            <td>SW-HQ3</td>
+                            <td>e0/2, e0/3</td>
+                            <td>LACP activo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>ACLs Principales</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre ACL</th>
+                            <th>Dispositivo</th>
+                            <th>Interfaz / Dirección</th>
+                            <th>Función</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INTERNET_TO_DMZ</td>
+                            <td>ISP-PROVEEDOR</td>
+                            <td>e0/0 (inbound)</td>
+                            <td>Permite solo HTTP/HTTPS hacia la IP pública del WebServer</td>
+                        </tr>
+                        <tr>
+                            <td>ACL_NO_BR1_TO_HQ</td>
+                            <td>HQ-PRINCIPAL</td>
+                            <td>Vlan44 (inbound)</td>
+                            <td>Restringe acceso desde 192.168.14.0/24 hacia la sede HQ (excepto ICMP/HTTP)</td>
+                        </tr>
+                        <tr>
+                            <td>DYN_BASE</td>
+                            <td>HQ-PRINCIPAL</td>
+                            <td>Vlan44 (inbound)</td>
+                            <td>ACL dinámica simulada para permitir temporalmente hosts de BRANCH-2</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -969,7 +1234,7 @@
                     <div class="command-text">show vlan brief</div>
                 </div>
                 <div class="command-box">
-                    <div class="command-text">show spanning-tree</div>
+                    <div class="command-text">show interfaces trunk</div>
                 </div>
                 <div class="command-box">
                     <div class="command-text">show etherchannel summary</div>
@@ -978,10 +1243,10 @@
                     <div class="command-text">show standby brief</div>
                 </div>
                 <div class="command-box">
-                    <div class="command-text">show ip dhcp relay</div>
+                    <div class="command-text">show ip nat translations</div>
                 </div>
                 <div class="command-box">
-                    <div class="command-text">show ip nat translations</div>
+                    <div class="command-text">show port-security interface</div>
                 </div>
             </div>
         </section>
@@ -1019,7 +1284,7 @@
 
         <!-- Footer -->
         <footer style="text-align: center; padding: 3rem 0; color: var(--text-secondary); border-top: 2px solid var(--cyber-blue); margin-top: 4rem;">
-            <p style="font-size: 1.2rem; margin-bottom: 1rem;">🌐 CloudBridge Perú - Network Operations Center</p>
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">🌐 Proyecto Multisede Grupo 04 – Network Operations Center</p>
             <p>Dashboard de Red Corporativa Multisede | 2025</p>
             <p style="margin-top: 1rem; color: var(--cyber-blue);">Powered by Cyberpunk Technology</p>
         </footer>
@@ -1040,10 +1305,9 @@
             window.requestAnimationFrame(step);
         }
 
-        // Initialize KPI animations
         document.addEventListener('DOMContentLoaded', () => {
             const kpiValues = document.querySelectorAll('.kpi-value');
-            
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1068,7 +1332,7 @@
                 });
             });
 
-            // Add WOW-like animations on scroll
+            // WOW-like animations on scroll
             const sections = document.querySelectorAll('.section');
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1109,12 +1373,11 @@
                         }
                     }
                 }
-
                 row.style.display = found ? '' : 'none';
             }
         }
 
-        // SVG node interactions
+        // SVG node hover interactions
         document.querySelectorAll('.node').forEach(node => {
             node.addEventListener('mouseenter', function() {
                 this.style.transform = 'scale(1.1)';
@@ -1124,13 +1387,13 @@
             });
         });
 
-        // Typewriter effect for commands
+        // Typewriter effect for command boxes
         const commandTexts = document.querySelectorAll('.command-text');
         commandTexts.forEach((cmd, index) => {
             const text = cmd.textContent;
             cmd.textContent = '';
             cmd.style.width = '0';
-            
+
             setTimeout(() => {
                 let i = 0;
                 const typeInterval = setInterval(() => {
